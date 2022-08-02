@@ -7,6 +7,9 @@ dotenv.config()
 
 const app = express()
 
+// config json
+app.use(express.json())
+
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.static(path.join(__dirname, '../public')))
