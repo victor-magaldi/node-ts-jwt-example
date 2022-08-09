@@ -8,5 +8,12 @@ export const registerUser = (req: Request, res: Response) => {
     })
   }
 
+  // MOCK
+  const userExists = false
+  if (userExists) {
+    return res.status(422).json({
+      error: 'E-mail já cadasttrado',
+    })
+  }
   res.json({ ok: true })
 }
