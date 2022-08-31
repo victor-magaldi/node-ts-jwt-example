@@ -10,12 +10,14 @@
         "dev": "npx nodemon -e ts,json,ejs src/server.ts"
     },
     "dependencies": {
+        "@types/redis": "^4.0.11",
         "bcrypt": "^5.0.1",
         "dotenv": "^16.0.1",
         "express": "^4.18.1",
         "global": "^4.4.0",
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^6.5.0",
+        "redis": "^4.3.0",
         "typescript": "^4.7.4"
     },
     "devDependencies": {
