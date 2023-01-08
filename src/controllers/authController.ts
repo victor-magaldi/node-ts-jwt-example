@@ -38,3 +38,12 @@ export const registerUser = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Ocorreu um erro inesperado no servidor' })
   }
 }
+
+export const authenticatedUser = async (req: Request, res: Response) => {
+  const { email, password } = req.body
+  if (!email || !password) {
+    return res.status(422).json({
+      error: ' email, password are required fields',
+    })
+  }
+}
