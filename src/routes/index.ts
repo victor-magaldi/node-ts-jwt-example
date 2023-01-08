@@ -7,7 +7,7 @@ const router = Router()
 
 router.get('/', PageController.home)
 router.post('/auth/register', AuthController.registerUser)
-router.post('/auth/user', AuthController.authenticatedUser)
+router.post('/auth/login', AuthController.loginUser)
 
 router.get(
   '/ping',

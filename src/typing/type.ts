@@ -8,3 +8,9 @@ export type Pet = {
   color: string
   sex: PetSex
 }
+
+export type UserDb = {
+  name: string
+  email: string
+  password: string
+}

@@ -2,6 +2,8 @@ import { Request, Response } from 'express'
 import bcrypt from 'bcrypt'
 import { LocalStorage } from 'node-localstorage'
 
+import type { UserDb } from '../typing/type'
+
 var localStorage = new LocalStorage('./userBd')
 
 export const registerUser = async (req: Request, res: Response) => {
@@ -39,11 +41,20 @@ export const registerUser = async (req: Request, res: Response) => {
   }
 }
 
-export const authenticatedUser = async (req: Request, res: Response) => {
+export const loginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body
   if (!email || !password) {
     return res.status(422).json({
-      error: ' email, password are required fields',
+      error: ' email and password are required fields',
     })
   }
+  const user = localStorage.getItem('user')
+  let userFormated: UserDb | null = user ? JSON.parse(user) : null
+  if (!userFormated) return res.json('error')
+
+  const checkPassword = await bcrypt.compare(password, userFormated.password)
+
+  console.log('checkPassword', checkPassword)
+
+  return checkPassword ? res.json({ login: true }) : res.json({ login: false })
 }
