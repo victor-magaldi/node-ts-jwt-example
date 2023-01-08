@@ -1,5 +1,8 @@
 import { Request, Response } from 'express'
 import bcrypt from 'bcrypt'
+import { LocalStorage } from 'node-localstorage'
+
+var localStorage = new LocalStorage('./userBd')
 
 export const registerUser = async (req: Request, res: Response) => {
   const { name, email, password, confirmPassword } = req.body
@@ -23,9 +26,15 @@ export const registerUser = async (req: Request, res: Response) => {
 
     console.log({ name, email, password })
     console.log(passwordHash)
-    res.json({ ok: true })
+
+    localStorage.setItem(
+      'user',
+      JSON.stringify({ name, email, password: passwordHash })
+    )
+
+    res.json({ message: 'user created' })
   } catch (error) {
     console.log('error ', error)
-    res.status(500).json({ error })
+    res.status(500).json({ error: 'Ocorreu um erro inesperado no servidor' })
   }
 }
